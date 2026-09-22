@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Identity ───────────────────────────────────────────────
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  studentProfile StudentProfile?
+  roles          UserRole[]
+  sessions       Session[]
+
+  @@index([email])
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+  RESTRICTED
+}
+
+model StudentProfile {
+  id                String           @id @default(cuid())
+  userId            String           @unique
+  user              User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studentId         String           @unique
+  firstName         String
+  lastName          String
+  classLevelId      String?
+  classLevel        ClassLevel?      @relation(fields: [classLevelId], references: [id])
+  schoolId          String?
+  school            School?          @relation(fields: [schoolId], references: [id])
+  academicSessionId String?
+  academicSession   AcademicSession? @relation(fields: [academicSessionId], references: [id])
+  profilePictureUrl String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+
+  @@index([classLevelId])
+  @@index([schoolId])
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        String           @unique // "SUPER_ADMIN", "ACADEMIC_ADMIN", "FINANCE_ADMIN", "SUPPORT_ADMIN"
+  description String?
+  permissions RolePermission[]
+  users       UserRole[]
+}
+
+model Permission {
+  id    String           @id @default(cuid())
+  key   String           @unique // "question:create", "exam:publish", "wallet:adjust", "payment:refund"
+  roles RolePermission[]
+}
+
+model RolePermission {
+  roleId       String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+}
+
+model UserRole {
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+}
+
+// ─── Academic Structure ─────────────────────────────────────
+
+model School {
+  id       String  @id @default(cuid())
+  name     String
+  isActive Boolean @default(true)
+
+  students         StudentProfile[]
+  academicSessions AcademicSession[]
+  createdAt        DateTime          @default(now())
+}
+
+model AcademicSession {
+  id        String   @id @default(cuid())
+  name      String   // "2026/2027"
+  schoolId  String?
+  school    School?  @relation(fields: [schoolId], references: [id])
+  startDate DateTime
+  endDate   DateTime
+  isCurrent Boolean  @default(false)
+
+  students StudentProfile[]
+}
+
+model ClassLevel {
+  id    String @id @default(cuid())
+  name  String @unique // "SS1", "SS2", "SS3"
+  order Int
+
+  students StudentProfile[]
+  subjects ClassSubject[]
+}
+
+model Subject {
+  id   String @id @default(cuid())
+  name String @unique
+
+  classes ClassSubject[]
+  topics  Topic[]
+}
+
+model ClassSubject {
+  classLevelId String
+  classLevel   ClassLevel @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
+  subjectId    String
+  subject      Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  @@id([classLevelId, subjectId])
+}
+
+model Topic {
+  id        String  @id @default(cuid())
+  name      String
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  subtopics Subtopic[]
+
+  @@index([subjectId])
+}
+
+model Subtopic {
+  id      String @id @default(cuid())
+  name    String
+  topicId String
+  topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@index([topicId])
+}
