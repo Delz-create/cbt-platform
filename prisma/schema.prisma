@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -12,7 +13,6 @@ datasource db {
 model User {
   id           String     @id @default(cuid())
   email        String     @unique
-  passwordHash String
   status       UserStatus @default(ACTIVE)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -21,7 +21,13 @@ model User {
   roles          UserRole[]
   sessions       Session[]
 
+  name          String
+  emailVerified Boolean   @default(false)
+  image         String?
+  accounts      Account[]
+
   @@index([email])
+  @@map("user")
 }
 
 enum UserStatus {
@@ -85,13 +91,19 @@ model UserRole {
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
   userId       String
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   expiresAt    DateTime
   createdAt    DateTime @default(now())
 
+  token     String
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+
   @@index([userId])
+  @@unique([token])
+  @@map("session")
 }
 
 // ─── Academic Structure ─────────────────────────────────────
@@ -108,7 +120,7 @@ model School {
 
 model AcademicSession {
   id        String   @id @default(cuid())
-  name      String   // "2026/2027"
+  name      String // "2026/2027"
   schoolId  String?
   school    School?  @relation(fields: [schoolId], references: [id])
   startDate DateTime
@@ -162,4 +174,36 @@ model Subtopic {
   topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
 
   @@index([topicId])
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
