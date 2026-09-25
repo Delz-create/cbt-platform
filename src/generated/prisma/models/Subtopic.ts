@@ -167,6 +167,7 @@ export type SubtopicWhereInput = {
   name?: Prisma.StringFilter<"Subtopic"> | string
   topicId?: Prisma.StringFilter<"Subtopic"> | string
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
+  questions?: Prisma.QuestionListRelationFilter
 }
 
 export type SubtopicOrderByWithRelationInput = {
@@ -174,6 +175,7 @@ export type SubtopicOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   topicId?: Prisma.SortOrder
   topic?: Prisma.TopicOrderByWithRelationInput
+  questions?: Prisma.QuestionOrderByRelationAggregateInput
 }
 
 export type SubtopicWhereUniqueInput = Prisma.AtLeast<{
@@ -184,6 +186,7 @@ export type SubtopicWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Subtopic"> | string
   topicId?: Prisma.StringFilter<"Subtopic"> | string
   topic?: Prisma.XOR<Prisma.TopicScalarRelationFilter, Prisma.TopicWhereInput>
+  questions?: Prisma.QuestionListRelationFilter
 }, "id">
 
 export type SubtopicOrderByWithAggregationInput = {
@@ -208,24 +211,28 @@ export type SubtopicCreateInput = {
   id?: string
   name: string
   topic: Prisma.TopicCreateNestedOneWithoutSubtopicsInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutSubtopicInput
 }
 
 export type SubtopicUncheckedCreateInput = {
   id?: string
   name: string
   topicId: string
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutSubtopicInput
 }
 
 export type SubtopicUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   topic?: Prisma.TopicUpdateOneRequiredWithoutSubtopicsNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutSubtopicNestedInput
 }
 
 export type SubtopicUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   topicId?: Prisma.StringFieldUpdateOperationsInput | string
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutSubtopicNestedInput
 }
 
 export type SubtopicCreateManyInput = {
@@ -273,6 +280,11 @@ export type SubtopicMinOrderByAggregateInput = {
   topicId?: Prisma.SortOrder
 }
 
+export type SubtopicNullableScalarRelationFilter = {
+  is?: Prisma.SubtopicWhereInput | null
+  isNot?: Prisma.SubtopicWhereInput | null
+}
+
 export type SubtopicCreateNestedManyWithoutTopicInput = {
   create?: Prisma.XOR<Prisma.SubtopicCreateWithoutTopicInput, Prisma.SubtopicUncheckedCreateWithoutTopicInput> | Prisma.SubtopicCreateWithoutTopicInput[] | Prisma.SubtopicUncheckedCreateWithoutTopicInput[]
   connectOrCreate?: Prisma.SubtopicCreateOrConnectWithoutTopicInput | Prisma.SubtopicCreateOrConnectWithoutTopicInput[]
@@ -315,14 +327,32 @@ export type SubtopicUncheckedUpdateManyWithoutTopicNestedInput = {
   deleteMany?: Prisma.SubtopicScalarWhereInput | Prisma.SubtopicScalarWhereInput[]
 }
 
+export type SubtopicCreateNestedOneWithoutQuestionsInput = {
+  create?: Prisma.XOR<Prisma.SubtopicCreateWithoutQuestionsInput, Prisma.SubtopicUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.SubtopicCreateOrConnectWithoutQuestionsInput
+  connect?: Prisma.SubtopicWhereUniqueInput
+}
+
+export type SubtopicUpdateOneWithoutQuestionsNestedInput = {
+  create?: Prisma.XOR<Prisma.SubtopicCreateWithoutQuestionsInput, Prisma.SubtopicUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.SubtopicCreateOrConnectWithoutQuestionsInput
+  upsert?: Prisma.SubtopicUpsertWithoutQuestionsInput
+  disconnect?: Prisma.SubtopicWhereInput | boolean
+  delete?: Prisma.SubtopicWhereInput | boolean
+  connect?: Prisma.SubtopicWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SubtopicUpdateToOneWithWhereWithoutQuestionsInput, Prisma.SubtopicUpdateWithoutQuestionsInput>, Prisma.SubtopicUncheckedUpdateWithoutQuestionsInput>
+}
+
 export type SubtopicCreateWithoutTopicInput = {
   id?: string
   name: string
+  questions?: Prisma.QuestionCreateNestedManyWithoutSubtopicInput
 }
 
 export type SubtopicUncheckedCreateWithoutTopicInput = {
   id?: string
   name: string
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutSubtopicInput
 }
 
 export type SubtopicCreateOrConnectWithoutTopicInput = {
@@ -360,6 +390,46 @@ export type SubtopicScalarWhereInput = {
   topicId?: Prisma.StringFilter<"Subtopic"> | string
 }
 
+export type SubtopicCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  topic: Prisma.TopicCreateNestedOneWithoutSubtopicsInput
+}
+
+export type SubtopicUncheckedCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  topicId: string
+}
+
+export type SubtopicCreateOrConnectWithoutQuestionsInput = {
+  where: Prisma.SubtopicWhereUniqueInput
+  create: Prisma.XOR<Prisma.SubtopicCreateWithoutQuestionsInput, Prisma.SubtopicUncheckedCreateWithoutQuestionsInput>
+}
+
+export type SubtopicUpsertWithoutQuestionsInput = {
+  update: Prisma.XOR<Prisma.SubtopicUpdateWithoutQuestionsInput, Prisma.SubtopicUncheckedUpdateWithoutQuestionsInput>
+  create: Prisma.XOR<Prisma.SubtopicCreateWithoutQuestionsInput, Prisma.SubtopicUncheckedCreateWithoutQuestionsInput>
+  where?: Prisma.SubtopicWhereInput
+}
+
+export type SubtopicUpdateToOneWithWhereWithoutQuestionsInput = {
+  where?: Prisma.SubtopicWhereInput
+  data: Prisma.XOR<Prisma.SubtopicUpdateWithoutQuestionsInput, Prisma.SubtopicUncheckedUpdateWithoutQuestionsInput>
+}
+
+export type SubtopicUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  topic?: Prisma.TopicUpdateOneRequiredWithoutSubtopicsNestedInput
+}
+
+export type SubtopicUncheckedUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  topicId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type SubtopicCreateManyTopicInput = {
   id?: string
   name: string
@@ -368,11 +438,13 @@ export type SubtopicCreateManyTopicInput = {
 export type SubtopicUpdateWithoutTopicInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  questions?: Prisma.QuestionUpdateManyWithoutSubtopicNestedInput
 }
 
 export type SubtopicUncheckedUpdateWithoutTopicInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutSubtopicNestedInput
 }
 
 export type SubtopicUncheckedUpdateManyWithoutTopicInput = {
@@ -381,12 +453,43 @@ export type SubtopicUncheckedUpdateManyWithoutTopicInput = {
 }
 
 
+/**
+ * Count Type SubtopicCountOutputType
+ */
+
+export type SubtopicCountOutputType = {
+  questions: number
+}
+
+export type SubtopicCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  questions?: boolean | SubtopicCountOutputTypeCountQuestionsArgs
+}
+
+/**
+ * SubtopicCountOutputType without action
+ */
+export type SubtopicCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SubtopicCountOutputType
+   */
+  select?: Prisma.SubtopicCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * SubtopicCountOutputType without action
+ */
+export type SubtopicCountOutputTypeCountQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestionWhereInput
+}
+
 
 export type SubtopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   topicId?: boolean
   topic?: boolean | Prisma.TopicDefaultArgs<ExtArgs>
+  questions?: boolean | Prisma.Subtopic$questionsArgs<ExtArgs>
+  _count?: boolean | Prisma.SubtopicCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["subtopic"]>
 
 export type SubtopicSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -412,6 +515,8 @@ export type SubtopicSelectScalar = {
 export type SubtopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "topicId", ExtArgs["result"]["subtopic"]>
 export type SubtopicInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   topic?: boolean | Prisma.TopicDefaultArgs<ExtArgs>
+  questions?: boolean | Prisma.Subtopic$questionsArgs<ExtArgs>
+  _count?: boolean | Prisma.SubtopicCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SubtopicIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   topic?: boolean | Prisma.TopicDefaultArgs<ExtArgs>
@@ -424,6 +529,7 @@ export type $SubtopicPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Subtopic"
   objects: {
     topic: Prisma.$TopicPayload<ExtArgs>
+    questions: Prisma.$QuestionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -824,6 +930,7 @@ readonly fields: SubtopicFieldRefs;
 export interface Prisma__SubtopicClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   topic<T extends Prisma.TopicDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TopicDefaultArgs<ExtArgs>>): Prisma.Prisma__TopicClient<runtime.Types.Result.GetResult<Prisma.$TopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  questions<T extends Prisma.Subtopic$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Subtopic$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1254,6 +1361,30 @@ export type SubtopicDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Subtopics to delete.
    */
   limit?: number
+}
+
+/**
+ * Subtopic.questions
+ */
+export type Subtopic$questionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Question
+   */
+  select?: Prisma.QuestionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Question
+   */
+  omit?: Prisma.QuestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestionInclude<ExtArgs> | null
+  where?: Prisma.QuestionWhereInput
+  orderBy?: Prisma.QuestionOrderByWithRelationInput | Prisma.QuestionOrderByWithRelationInput[]
+  cursor?: Prisma.QuestionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestionScalarFieldEnum | Prisma.QuestionScalarFieldEnum[]
 }
 
 /**

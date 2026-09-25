@@ -168,6 +168,7 @@ export type TopicWhereInput = {
   subjectId?: Prisma.StringFilter<"Topic"> | string
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   subtopics?: Prisma.SubtopicListRelationFilter
+  questions?: Prisma.QuestionListRelationFilter
 }
 
 export type TopicOrderByWithRelationInput = {
@@ -176,6 +177,7 @@ export type TopicOrderByWithRelationInput = {
   subjectId?: Prisma.SortOrder
   subject?: Prisma.SubjectOrderByWithRelationInput
   subtopics?: Prisma.SubtopicOrderByRelationAggregateInput
+  questions?: Prisma.QuestionOrderByRelationAggregateInput
 }
 
 export type TopicWhereUniqueInput = Prisma.AtLeast<{
@@ -187,6 +189,7 @@ export type TopicWhereUniqueInput = Prisma.AtLeast<{
   subjectId?: Prisma.StringFilter<"Topic"> | string
   subject?: Prisma.XOR<Prisma.SubjectScalarRelationFilter, Prisma.SubjectWhereInput>
   subtopics?: Prisma.SubtopicListRelationFilter
+  questions?: Prisma.QuestionListRelationFilter
 }, "id">
 
 export type TopicOrderByWithAggregationInput = {
@@ -212,6 +215,7 @@ export type TopicCreateInput = {
   name: string
   subject: Prisma.SubjectCreateNestedOneWithoutTopicsInput
   subtopics?: Prisma.SubtopicCreateNestedManyWithoutTopicInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUncheckedCreateInput = {
@@ -219,6 +223,7 @@ export type TopicUncheckedCreateInput = {
   name: string
   subjectId: string
   subtopics?: Prisma.SubtopicUncheckedCreateNestedManyWithoutTopicInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUpdateInput = {
@@ -226,6 +231,7 @@ export type TopicUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subject?: Prisma.SubjectUpdateOneRequiredWithoutTopicsNestedInput
   subtopics?: Prisma.SubtopicUpdateManyWithoutTopicNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateInput = {
@@ -233,6 +239,7 @@ export type TopicUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
   subtopics?: Prisma.SubtopicUncheckedUpdateManyWithoutTopicNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicCreateManyInput = {
@@ -283,6 +290,11 @@ export type TopicMinOrderByAggregateInput = {
 export type TopicScalarRelationFilter = {
   is?: Prisma.TopicWhereInput
   isNot?: Prisma.TopicWhereInput
+}
+
+export type TopicNullableScalarRelationFilter = {
+  is?: Prisma.TopicWhereInput | null
+  isNot?: Prisma.TopicWhereInput | null
 }
 
 export type TopicCreateNestedManyWithoutSubjectInput = {
@@ -341,16 +353,34 @@ export type TopicUpdateOneRequiredWithoutSubtopicsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TopicUpdateToOneWithWhereWithoutSubtopicsInput, Prisma.TopicUpdateWithoutSubtopicsInput>, Prisma.TopicUncheckedUpdateWithoutSubtopicsInput>
 }
 
+export type TopicCreateNestedOneWithoutQuestionsInput = {
+  create?: Prisma.XOR<Prisma.TopicCreateWithoutQuestionsInput, Prisma.TopicUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.TopicCreateOrConnectWithoutQuestionsInput
+  connect?: Prisma.TopicWhereUniqueInput
+}
+
+export type TopicUpdateOneWithoutQuestionsNestedInput = {
+  create?: Prisma.XOR<Prisma.TopicCreateWithoutQuestionsInput, Prisma.TopicUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.TopicCreateOrConnectWithoutQuestionsInput
+  upsert?: Prisma.TopicUpsertWithoutQuestionsInput
+  disconnect?: Prisma.TopicWhereInput | boolean
+  delete?: Prisma.TopicWhereInput | boolean
+  connect?: Prisma.TopicWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TopicUpdateToOneWithWhereWithoutQuestionsInput, Prisma.TopicUpdateWithoutQuestionsInput>, Prisma.TopicUncheckedUpdateWithoutQuestionsInput>
+}
+
 export type TopicCreateWithoutSubjectInput = {
   id?: string
   name: string
   subtopics?: Prisma.SubtopicCreateNestedManyWithoutTopicInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUncheckedCreateWithoutSubjectInput = {
   id?: string
   name: string
   subtopics?: Prisma.SubtopicUncheckedCreateNestedManyWithoutTopicInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutTopicInput
 }
 
 export type TopicCreateOrConnectWithoutSubjectInput = {
@@ -392,12 +422,14 @@ export type TopicCreateWithoutSubtopicsInput = {
   id?: string
   name: string
   subject: Prisma.SubjectCreateNestedOneWithoutTopicsInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutTopicInput
 }
 
 export type TopicUncheckedCreateWithoutSubtopicsInput = {
   id?: string
   name: string
   subjectId: string
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutTopicInput
 }
 
 export type TopicCreateOrConnectWithoutSubtopicsInput = {
@@ -420,12 +452,58 @@ export type TopicUpdateWithoutSubtopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subject?: Prisma.SubjectUpdateOneRequiredWithoutTopicsNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateWithoutSubtopicsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subjectId?: Prisma.StringFieldUpdateOperationsInput | string
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutTopicNestedInput
+}
+
+export type TopicCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  subject: Prisma.SubjectCreateNestedOneWithoutTopicsInput
+  subtopics?: Prisma.SubtopicCreateNestedManyWithoutTopicInput
+}
+
+export type TopicUncheckedCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  subjectId: string
+  subtopics?: Prisma.SubtopicUncheckedCreateNestedManyWithoutTopicInput
+}
+
+export type TopicCreateOrConnectWithoutQuestionsInput = {
+  where: Prisma.TopicWhereUniqueInput
+  create: Prisma.XOR<Prisma.TopicCreateWithoutQuestionsInput, Prisma.TopicUncheckedCreateWithoutQuestionsInput>
+}
+
+export type TopicUpsertWithoutQuestionsInput = {
+  update: Prisma.XOR<Prisma.TopicUpdateWithoutQuestionsInput, Prisma.TopicUncheckedUpdateWithoutQuestionsInput>
+  create: Prisma.XOR<Prisma.TopicCreateWithoutQuestionsInput, Prisma.TopicUncheckedCreateWithoutQuestionsInput>
+  where?: Prisma.TopicWhereInput
+}
+
+export type TopicUpdateToOneWithWhereWithoutQuestionsInput = {
+  where?: Prisma.TopicWhereInput
+  data: Prisma.XOR<Prisma.TopicUpdateWithoutQuestionsInput, Prisma.TopicUncheckedUpdateWithoutQuestionsInput>
+}
+
+export type TopicUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subject?: Prisma.SubjectUpdateOneRequiredWithoutTopicsNestedInput
+  subtopics?: Prisma.SubtopicUpdateManyWithoutTopicNestedInput
+}
+
+export type TopicUncheckedUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subjectId?: Prisma.StringFieldUpdateOperationsInput | string
+  subtopics?: Prisma.SubtopicUncheckedUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicCreateManySubjectInput = {
@@ -437,12 +515,14 @@ export type TopicUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subtopics?: Prisma.SubtopicUpdateManyWithoutTopicNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateWithoutSubjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subtopics?: Prisma.SubtopicUncheckedUpdateManyWithoutTopicNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutTopicNestedInput
 }
 
 export type TopicUncheckedUpdateManyWithoutSubjectInput = {
@@ -457,10 +537,12 @@ export type TopicUncheckedUpdateManyWithoutSubjectInput = {
 
 export type TopicCountOutputType = {
   subtopics: number
+  questions: number
 }
 
 export type TopicCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subtopics?: boolean | TopicCountOutputTypeCountSubtopicsArgs
+  questions?: boolean | TopicCountOutputTypeCountQuestionsArgs
 }
 
 /**
@@ -480,6 +562,13 @@ export type TopicCountOutputTypeCountSubtopicsArgs<ExtArgs extends runtime.Types
   where?: Prisma.SubtopicWhereInput
 }
 
+/**
+ * TopicCountOutputType without action
+ */
+export type TopicCountOutputTypeCountQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestionWhereInput
+}
+
 
 export type TopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -487,6 +576,7 @@ export type TopicSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   subjectId?: boolean
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   subtopics?: boolean | Prisma.Topic$subtopicsArgs<ExtArgs>
+  questions?: boolean | Prisma.Topic$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.TopicCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["topic"]>
 
@@ -514,6 +604,7 @@ export type TopicOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type TopicInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subject?: boolean | Prisma.SubjectDefaultArgs<ExtArgs>
   subtopics?: boolean | Prisma.Topic$subtopicsArgs<ExtArgs>
+  questions?: boolean | Prisma.Topic$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.TopicCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TopicIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -528,6 +619,7 @@ export type $TopicPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     subject: Prisma.$SubjectPayload<ExtArgs>
     subtopics: Prisma.$SubtopicPayload<ExtArgs>[]
+    questions: Prisma.$QuestionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -929,6 +1021,7 @@ export interface Prisma__TopicClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subject<T extends Prisma.SubjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SubjectDefaultArgs<ExtArgs>>): Prisma.Prisma__SubjectClient<runtime.Types.Result.GetResult<Prisma.$SubjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   subtopics<T extends Prisma.Topic$subtopicsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Topic$subtopicsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubtopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  questions<T extends Prisma.Topic$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Topic$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1383,6 +1476,30 @@ export type Topic$subtopicsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.SubtopicScalarFieldEnum | Prisma.SubtopicScalarFieldEnum[]
+}
+
+/**
+ * Topic.questions
+ */
+export type Topic$questionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Question
+   */
+  select?: Prisma.QuestionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Question
+   */
+  omit?: Prisma.QuestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestionInclude<ExtArgs> | null
+  where?: Prisma.QuestionWhereInput
+  orderBy?: Prisma.QuestionOrderByWithRelationInput | Prisma.QuestionOrderByWithRelationInput[]
+  cursor?: Prisma.QuestionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestionScalarFieldEnum | Prisma.QuestionScalarFieldEnum[]
 }
 
 /**

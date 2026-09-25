@@ -16,3 +16,53 @@ export const UserStatus = {
 } as const
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const QuestionSource = {
+  WAEC: 'WAEC',
+  JAMB: 'JAMB',
+  NECO: 'NECO',
+  JOINT: 'JOINT',
+  SCHOOL: 'SCHOOL',
+  PRACTICE: 'PRACTICE',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type QuestionSource = (typeof QuestionSource)[keyof typeof QuestionSource]
+
+
+export const QuestionType = {
+  MCQ: 'MCQ',
+  TRUE_FALSE: 'TRUE_FALSE'
+} as const
+
+export type QuestionType = (typeof QuestionType)[keyof typeof QuestionType]
+
+
+export const QuestionDifficulty = {
+  EASY: 'EASY',
+  MEDIUM: 'MEDIUM',
+  HARD: 'HARD'
+} as const
+
+export type QuestionDifficulty = (typeof QuestionDifficulty)[keyof typeof QuestionDifficulty]
+
+
+export const QuestionStatus = {
+  DRAFT: 'DRAFT',
+  REVIEW: 'REVIEW',
+  PUBLISHED: 'PUBLISHED',
+  ARCHIVED: 'ARCHIVED'
+} as const
+
+export type QuestionStatus = (typeof QuestionStatus)[keyof typeof QuestionStatus]
+
+
+export const QuestionImportStatus = {
+  PENDING: 'PENDING',
+  VALIDATED: 'VALIDATED',
+  COMMITTED: 'COMMITTED',
+  FAILED: 'FAILED'
+} as const
+
+export type QuestionImportStatus = (typeof QuestionImportStatus)[keyof typeof QuestionImportStatus]

@@ -202,6 +202,7 @@ export type ClassLevelWhereInput = {
   order?: Prisma.IntFilter<"ClassLevel"> | number
   students?: Prisma.StudentProfileListRelationFilter
   subjects?: Prisma.ClassSubjectListRelationFilter
+  questions?: Prisma.QuestionListRelationFilter
 }
 
 export type ClassLevelOrderByWithRelationInput = {
@@ -210,6 +211,7 @@ export type ClassLevelOrderByWithRelationInput = {
   order?: Prisma.SortOrder
   students?: Prisma.StudentProfileOrderByRelationAggregateInput
   subjects?: Prisma.ClassSubjectOrderByRelationAggregateInput
+  questions?: Prisma.QuestionOrderByRelationAggregateInput
 }
 
 export type ClassLevelWhereUniqueInput = Prisma.AtLeast<{
@@ -221,6 +223,7 @@ export type ClassLevelWhereUniqueInput = Prisma.AtLeast<{
   order?: Prisma.IntFilter<"ClassLevel"> | number
   students?: Prisma.StudentProfileListRelationFilter
   subjects?: Prisma.ClassSubjectListRelationFilter
+  questions?: Prisma.QuestionListRelationFilter
 }, "id" | "name">
 
 export type ClassLevelOrderByWithAggregationInput = {
@@ -249,6 +252,7 @@ export type ClassLevelCreateInput = {
   order: number
   students?: Prisma.StudentProfileCreateNestedManyWithoutClassLevelInput
   subjects?: Prisma.ClassSubjectCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelUncheckedCreateInput = {
@@ -257,6 +261,7 @@ export type ClassLevelUncheckedCreateInput = {
   order: number
   students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassLevelInput
   subjects?: Prisma.ClassSubjectUncheckedCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelUpdateInput = {
@@ -265,6 +270,7 @@ export type ClassLevelUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   students?: Prisma.StudentProfileUpdateManyWithoutClassLevelNestedInput
   subjects?: Prisma.ClassSubjectUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutClassLevelNestedInput
 }
 
 export type ClassLevelUncheckedUpdateInput = {
@@ -273,6 +279,7 @@ export type ClassLevelUncheckedUpdateInput = {
   order?: Prisma.IntFieldUpdateOperationsInput | number
   students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassLevelNestedInput
   subjects?: Prisma.ClassSubjectUncheckedUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutClassLevelNestedInput
 }
 
 export type ClassLevelCreateManyInput = {
@@ -367,11 +374,26 @@ export type ClassLevelUpdateOneRequiredWithoutSubjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClassLevelUpdateToOneWithWhereWithoutSubjectsInput, Prisma.ClassLevelUpdateWithoutSubjectsInput>, Prisma.ClassLevelUncheckedUpdateWithoutSubjectsInput>
 }
 
+export type ClassLevelCreateNestedOneWithoutQuestionsInput = {
+  create?: Prisma.XOR<Prisma.ClassLevelCreateWithoutQuestionsInput, Prisma.ClassLevelUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.ClassLevelCreateOrConnectWithoutQuestionsInput
+  connect?: Prisma.ClassLevelWhereUniqueInput
+}
+
+export type ClassLevelUpdateOneRequiredWithoutQuestionsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClassLevelCreateWithoutQuestionsInput, Prisma.ClassLevelUncheckedCreateWithoutQuestionsInput>
+  connectOrCreate?: Prisma.ClassLevelCreateOrConnectWithoutQuestionsInput
+  upsert?: Prisma.ClassLevelUpsertWithoutQuestionsInput
+  connect?: Prisma.ClassLevelWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClassLevelUpdateToOneWithWhereWithoutQuestionsInput, Prisma.ClassLevelUpdateWithoutQuestionsInput>, Prisma.ClassLevelUncheckedUpdateWithoutQuestionsInput>
+}
+
 export type ClassLevelCreateWithoutStudentsInput = {
   id?: string
   name: string
   order: number
   subjects?: Prisma.ClassSubjectCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelUncheckedCreateWithoutStudentsInput = {
@@ -379,6 +401,7 @@ export type ClassLevelUncheckedCreateWithoutStudentsInput = {
   name: string
   order: number
   subjects?: Prisma.ClassSubjectUncheckedCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelCreateOrConnectWithoutStudentsInput = {
@@ -402,6 +425,7 @@ export type ClassLevelUpdateWithoutStudentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   subjects?: Prisma.ClassSubjectUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutClassLevelNestedInput
 }
 
 export type ClassLevelUncheckedUpdateWithoutStudentsInput = {
@@ -409,6 +433,7 @@ export type ClassLevelUncheckedUpdateWithoutStudentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   subjects?: Prisma.ClassSubjectUncheckedUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutClassLevelNestedInput
 }
 
 export type ClassLevelCreateWithoutSubjectsInput = {
@@ -416,6 +441,7 @@ export type ClassLevelCreateWithoutSubjectsInput = {
   name: string
   order: number
   students?: Prisma.StudentProfileCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelUncheckedCreateWithoutSubjectsInput = {
@@ -423,6 +449,7 @@ export type ClassLevelUncheckedCreateWithoutSubjectsInput = {
   name: string
   order: number
   students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassLevelInput
+  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutClassLevelInput
 }
 
 export type ClassLevelCreateOrConnectWithoutSubjectsInput = {
@@ -446,6 +473,7 @@ export type ClassLevelUpdateWithoutSubjectsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   students?: Prisma.StudentProfileUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUpdateManyWithoutClassLevelNestedInput
 }
 
 export type ClassLevelUncheckedUpdateWithoutSubjectsInput = {
@@ -453,6 +481,55 @@ export type ClassLevelUncheckedUpdateWithoutSubjectsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   order?: Prisma.IntFieldUpdateOperationsInput | number
   students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassLevelNestedInput
+  questions?: Prisma.QuestionUncheckedUpdateManyWithoutClassLevelNestedInput
+}
+
+export type ClassLevelCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  order: number
+  students?: Prisma.StudentProfileCreateNestedManyWithoutClassLevelInput
+  subjects?: Prisma.ClassSubjectCreateNestedManyWithoutClassLevelInput
+}
+
+export type ClassLevelUncheckedCreateWithoutQuestionsInput = {
+  id?: string
+  name: string
+  order: number
+  students?: Prisma.StudentProfileUncheckedCreateNestedManyWithoutClassLevelInput
+  subjects?: Prisma.ClassSubjectUncheckedCreateNestedManyWithoutClassLevelInput
+}
+
+export type ClassLevelCreateOrConnectWithoutQuestionsInput = {
+  where: Prisma.ClassLevelWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClassLevelCreateWithoutQuestionsInput, Prisma.ClassLevelUncheckedCreateWithoutQuestionsInput>
+}
+
+export type ClassLevelUpsertWithoutQuestionsInput = {
+  update: Prisma.XOR<Prisma.ClassLevelUpdateWithoutQuestionsInput, Prisma.ClassLevelUncheckedUpdateWithoutQuestionsInput>
+  create: Prisma.XOR<Prisma.ClassLevelCreateWithoutQuestionsInput, Prisma.ClassLevelUncheckedCreateWithoutQuestionsInput>
+  where?: Prisma.ClassLevelWhereInput
+}
+
+export type ClassLevelUpdateToOneWithWhereWithoutQuestionsInput = {
+  where?: Prisma.ClassLevelWhereInput
+  data: Prisma.XOR<Prisma.ClassLevelUpdateWithoutQuestionsInput, Prisma.ClassLevelUncheckedUpdateWithoutQuestionsInput>
+}
+
+export type ClassLevelUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  students?: Prisma.StudentProfileUpdateManyWithoutClassLevelNestedInput
+  subjects?: Prisma.ClassSubjectUpdateManyWithoutClassLevelNestedInput
+}
+
+export type ClassLevelUncheckedUpdateWithoutQuestionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  students?: Prisma.StudentProfileUncheckedUpdateManyWithoutClassLevelNestedInput
+  subjects?: Prisma.ClassSubjectUncheckedUpdateManyWithoutClassLevelNestedInput
 }
 
 
@@ -463,11 +540,13 @@ export type ClassLevelUncheckedUpdateWithoutSubjectsInput = {
 export type ClassLevelCountOutputType = {
   students: number
   subjects: number
+  questions: number
 }
 
 export type ClassLevelCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   students?: boolean | ClassLevelCountOutputTypeCountStudentsArgs
   subjects?: boolean | ClassLevelCountOutputTypeCountSubjectsArgs
+  questions?: boolean | ClassLevelCountOutputTypeCountQuestionsArgs
 }
 
 /**
@@ -494,6 +573,13 @@ export type ClassLevelCountOutputTypeCountSubjectsArgs<ExtArgs extends runtime.T
   where?: Prisma.ClassSubjectWhereInput
 }
 
+/**
+ * ClassLevelCountOutputType without action
+ */
+export type ClassLevelCountOutputTypeCountQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.QuestionWhereInput
+}
+
 
 export type ClassLevelSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -501,6 +587,7 @@ export type ClassLevelSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   order?: boolean
   students?: boolean | Prisma.ClassLevel$studentsArgs<ExtArgs>
   subjects?: boolean | Prisma.ClassLevel$subjectsArgs<ExtArgs>
+  questions?: boolean | Prisma.ClassLevel$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassLevelCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["classLevel"]>
 
@@ -526,6 +613,7 @@ export type ClassLevelOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type ClassLevelInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   students?: boolean | Prisma.ClassLevel$studentsArgs<ExtArgs>
   subjects?: boolean | Prisma.ClassLevel$subjectsArgs<ExtArgs>
+  questions?: boolean | Prisma.ClassLevel$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.ClassLevelCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ClassLevelIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -536,6 +624,7 @@ export type $ClassLevelPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     students: Prisma.$StudentProfilePayload<ExtArgs>[]
     subjects: Prisma.$ClassSubjectPayload<ExtArgs>[]
+    questions: Prisma.$QuestionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -937,6 +1026,7 @@ export interface Prisma__ClassLevelClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   students<T extends Prisma.ClassLevel$studentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClassLevel$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   subjects<T extends Prisma.ClassLevel$subjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClassLevel$subjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClassSubjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  questions<T extends Prisma.ClassLevel$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClassLevel$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1407,6 +1497,30 @@ export type ClassLevel$subjectsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ClassSubjectScalarFieldEnum | Prisma.ClassSubjectScalarFieldEnum[]
+}
+
+/**
+ * ClassLevel.questions
+ */
+export type ClassLevel$questionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Question
+   */
+  select?: Prisma.QuestionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Question
+   */
+  omit?: Prisma.QuestionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.QuestionInclude<ExtArgs> | null
+  where?: Prisma.QuestionWhereInput
+  orderBy?: Prisma.QuestionOrderByWithRelationInput | Prisma.QuestionOrderByWithRelationInput[]
+  cursor?: Prisma.QuestionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.QuestionScalarFieldEnum | Prisma.QuestionScalarFieldEnum[]
 }
 
 /**

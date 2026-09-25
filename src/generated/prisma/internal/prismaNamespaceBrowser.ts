@@ -66,7 +66,12 @@ export const ModelName = {
   Topic: 'Topic',
   Subtopic: 'Subtopic',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  Question: 'Question',
+  QuestionOption: 'QuestionOption',
+  QuestionTag: 'QuestionTag',
+  QuestionImport: 'QuestionImport',
+  QuestionImportError: 'QuestionImportError'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -259,12 +264,86 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const QuestionScalarFieldEnum = {
+  id: 'id',
+  source: 'source',
+  year: 'year',
+  classLevelId: 'classLevelId',
+  subjectId: 'subjectId',
+  topicId: 'topicId',
+  subtopicId: 'subtopicId',
+  type: 'type',
+  difficulty: 'difficulty',
+  text: 'text',
+  explanation: 'explanation',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
+
+
+export const QuestionOptionScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  text: 'text',
+  isCorrect: 'isCorrect',
+  order: 'order'
+} as const
+
+export type QuestionOptionScalarFieldEnum = (typeof QuestionOptionScalarFieldEnum)[keyof typeof QuestionOptionScalarFieldEnum]
+
+
+export const QuestionTagScalarFieldEnum = {
+  id: 'id',
+  questionId: 'questionId',
+  tag: 'tag'
+} as const
+
+export type QuestionTagScalarFieldEnum = (typeof QuestionTagScalarFieldEnum)[keyof typeof QuestionTagScalarFieldEnum]
+
+
+export const QuestionImportScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  status: 'status',
+  totalRows: 'totalRows',
+  validRows: 'validRows',
+  errorRows: 'errorRows',
+  rawData: 'rawData',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type QuestionImportScalarFieldEnum = (typeof QuestionImportScalarFieldEnum)[keyof typeof QuestionImportScalarFieldEnum]
+
+
+export const QuestionImportErrorScalarFieldEnum = {
+  id: 'id',
+  importId: 'importId',
+  rowNumber: 'rowNumber',
+  message: 'message',
+  rowData: 'rowData'
+} as const
+
+export type QuestionImportErrorScalarFieldEnum = (typeof QuestionImportErrorScalarFieldEnum)[keyof typeof QuestionImportErrorScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {
@@ -281,4 +360,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

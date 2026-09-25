@@ -97,3 +97,28 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Question
+ * 
+ */
+export type Question = Prisma.QuestionModel
+/**
+ * Model QuestionOption
+ * 
+ */
+export type QuestionOption = Prisma.QuestionOptionModel
+/**
+ * Model QuestionTag
+ * 
+ */
+export type QuestionTag = Prisma.QuestionTagModel
+/**
+ * Model QuestionImport
+ * 
+ */
+export type QuestionImport = Prisma.QuestionImportModel
+/**
+ * Model QuestionImportError
+ * 
+ */
+export type QuestionImportError = Prisma.QuestionImportErrorModel
